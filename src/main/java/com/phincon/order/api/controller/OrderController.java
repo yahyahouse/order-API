@@ -14,12 +14,8 @@ import reactor.core.publisher.Mono;
 @RequestMapping("/order")
 public class OrderController {
 
-    private final OrderService orderService;
-
     @Autowired
-    public OrderController(OrderService orderService){
-        this.orderService = orderService;
-    }
+    OrderService orderService;
 
     @PostMapping("/create")
     public Mono<Orders> createOrder(@RequestBody OrdersDto order) throws InterruptedException {

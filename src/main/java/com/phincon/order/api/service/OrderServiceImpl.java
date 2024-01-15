@@ -15,12 +15,8 @@ import java.time.Duration;
 @Service
 @Slf4j
 public class OrderServiceImpl implements OrderService {
-    private final JmsTemplate jmsTemplate;
-
     @Autowired
-    public OrderServiceImpl(JmsTemplate jmsTemplate) {
-        this.jmsTemplate = jmsTemplate;
-    }
+    JmsTemplate jmsTemplate;
 
     Orders orderNew = new Orders();
 
@@ -31,7 +27,7 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @JmsListener(destination = "queue.failed")
-    public void revertOrder(Message<Orders> orders) {
+    public void failedOrder(Message<Orders> orders) {
         orderNew.setStatus(orders.getPayload().getStatus());
         log.info("Order reverted: " + orders.getPayload());
     }
