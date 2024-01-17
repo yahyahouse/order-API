@@ -4,10 +4,7 @@ import com.phincon.order.api.model.Orders;
 import com.phincon.order.api.model.OrdersDto;
 import com.phincon.order.api.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Mono;
 
 @RestController
@@ -20,6 +17,11 @@ public class OrderController {
     @PostMapping("/create")
     public Mono<Orders> createOrder(@RequestBody OrdersDto order) throws InterruptedException {
         return orderService.createOrder(order);
+    }
+
+    @GetMapping("/get-orders/{id}")
+    public Mono<Orders> getOrder(@PathVariable String id) {
+        return orderService.getOrderById(id);
     }
 
 
