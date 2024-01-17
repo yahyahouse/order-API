@@ -60,4 +60,15 @@ class OrderServiceImplTest {
                 .verifyComplete();
         verify(jmsTemplate).convertAndSend("queue.order", orderService.orderNew);
     }
+
+    @Test
+    void receiveMessage() {
+        OrderServiceImpl orderService = new OrderServiceImpl();
+        Orders order = new Orders();
+        order.setStatus("Completed");
+        Message<Orders> message = new GenericMessage<>(order);
+        orderService.receiveMessage(message);
+        orderService.completeOrder(message);
+        assertEquals("Completed", orderService.orderNew.getStatus());
+    }
 }
