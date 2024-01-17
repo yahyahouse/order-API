@@ -7,4 +7,5 @@ import reactor.core.publisher.Mono;
 
 public interface OrderService {
     Mono<Orders> createOrder(OrdersDto order) throws InterruptedException;
+    Mono<Orders> getOrderById(String id);
 }
