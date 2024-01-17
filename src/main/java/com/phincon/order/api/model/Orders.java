@@ -50,4 +50,11 @@ public class Orders {
     public Orders() {
     }
 
+    public Orders(String id, String productId, String status, Long price, String actionId) {
+        this.id = id;
+        this.productId = productId;
+        this.status = status;
+        this.price = price;
+        this.actionId = actionId;
+    }
 }
