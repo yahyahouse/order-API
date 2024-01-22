@@ -15,8 +15,9 @@ public class OrderController {
     OrderService orderService;
 
     @PostMapping("/create")
-    public Mono<Orders> createOrder(@RequestBody OrdersDto order) throws InterruptedException {
-        return orderService.createOrder(order);
+    public Mono<String> createOrder(@RequestBody OrdersDto order) throws InterruptedException {
+        orderService.createOrder(order).subscribe();
+        return Mono.just("id :" + order.getId());
     }
 
     @GetMapping("/get-orders/{id}")
